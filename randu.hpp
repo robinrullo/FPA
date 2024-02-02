@@ -14,6 +14,4 @@ inline double randu()
 }
 
 
-
-
 #endif //RANDU_HPP

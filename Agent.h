@@ -22,7 +22,7 @@ public:
     explicit Agent(const std::vector<double>& solution = {}, double fitness = 0.);
 
     static int increase();
-    [[nodiscard]] Agent copy() const;
+    Agent copy() const;
     void print() const;
 };
 

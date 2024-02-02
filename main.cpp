@@ -2,13 +2,11 @@
 #include <sstream>
 
 #include "FPA.h"
-#include "Logger.h"
 #include "ObjectiveFunctions.h"
 
 int main()
 {
     clock_t tStart = clock();
-    Logger::initializeLogger();
 
     std::vector<ObjectiveFunction*> objectiveFunctions = {
         new Sphere(), new Rosenbrock(), new Ackley(), new Rastrigin()
@@ -37,18 +35,22 @@ int main()
                                          dimensions);
                     auto bestAgent = optimizer.solve();
 
-                    const auto fitness = Logger::doubleToString(bestAgent.fitness);
-                    const auto solutions = Logger::vectorToJSON(bestAgent.solution);
+                    // Join vector to string
+                    auto ss = std::stringstream();
+                    for (auto& x : bestAgent.solution)
+                    {
+                        ss << x << " ";
+                    }
+                    auto solution = ss.str();
 
-                    Logger::getLogger()->info(
-                        ",{}",
-                        "\"compute_exec_time\": " +
-                        std::to_string(static_cast<double>(clock() - tInnerStart) / CLOCKS_PER_SEC) +
-                        ", \"dimensions\": " +
-                        std::to_string(dimensions) + ", \"pop_size\": " + std::to_string(pop_size)
-                        + ", \"objective_function\": \"" + objectiveFunc->getName() + "\", \"run\": " + std::to_string(run)
-                        + ", \"fitness\": " + fitness + ", \"solutions\": " +
-                        solutions);
+                    std::cout << "Agent: " << "Fitness: " << bestAgent.fitness << " Solutions: " << solution << std::endl;
+                    std::cout << "Fonction objectif: " << objectiveFunc->getName() << std::endl;
+                    std::cout << "Dimensions: " << dimensions << std::endl;
+                    std::cout << "Taille de la population: " << pop_size << std::endl;
+                    std::cout << "Run: " << run << std::endl;
+                    std::cout << "Temps d'execution: " << static_cast<double>(clock() - tInnerStart) / CLOCKS_PER_SEC << std::endl;
+                    // Separator
+                    std::cout << "----------------------------------------" << std::endl;
                 }
             }
         }

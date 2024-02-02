@@ -32,18 +32,18 @@ public:
     static Agent getBetterAgent(const std::pair<Agent, Agent>& agents, const std::string& minmax, const bool& reverse);
     std::vector<Agent> generatePopulation() const;
     Solution generateSolution() const;
-    [[nodiscard]] double getFitness(const Solution& solution) const;
+    double getFitness(const Solution& solution) const;
     Solution amendSolution(const Solution& x, const std::pair<std::vector<double>, std::vector<double>>& bounds) const;
     Solution correctSolution(const Solution& x, const std::pair<std::vector<double>, std::vector<double>>& bounds) const;
     Agent& solve();
 
 private:
-    int epoch{};
-    int pop_size{};
-    double pc{};
-    double pm{};
-    double p_s{};
-    double levy_multiplier{};
+    int epoch;
+    int pop_size;
+    double pc;
+    double pm;
+    double p_s;
+    double levy_multiplier;
     const ObjectiveFunction* objectiveFunc;
     std::pair<std::vector<double>, std::vector<double>> bounds;
     std::string minmax;

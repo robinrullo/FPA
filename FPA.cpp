@@ -10,8 +10,6 @@
 #include "randChoice.hpp"
 #include "randu.hpp"
 
-int nfe_counter = 0;
-
 FPA::FPA(
     const int& epoch,
     const int& pop_size,

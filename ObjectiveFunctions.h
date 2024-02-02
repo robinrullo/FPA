@@ -12,25 +12,25 @@ class ObjectiveFunction
 public:
     virtual ~ObjectiveFunction() = default;
 
-    [[nodiscard]] virtual double compute_fitness(const double& x) const
+    virtual double compute_fitness(const double& x) const
     {
         return 0.;
     };
 
-    [[nodiscard]] virtual std::string getName() const = 0;
+    virtual std::string getName() const = 0;
 };
 
 class Rosenbrock final : public ObjectiveFunction
 {
 public:
-    [[nodiscard]] double compute_fitness(const double& x) const override
+    double compute_fitness(const double& x) const override
     {
         double sum = 0;
         sum += std::pow(1 - x, 2) + 100 * std::pow(x, 2);
         return sum;
     }
 
-    [[nodiscard]] std::string getName() const override
+    std::string getName() const override
     {
         return name;
     }
@@ -42,14 +42,14 @@ private:
 class Rastrigin final : public ObjectiveFunction
 {
 public:
-    [[nodiscard]] double compute_fitness(const double& x) const override
+    double compute_fitness(const double& x) const override
     {
         double sum = 0;
         sum += std::pow(x, 2) - 10 * std::cos(2 * M_PI * x) + 10;
         return sum;
     }
 
-    [[nodiscard]] std::string getName() const override
+    std::string getName() const override
     {
         return name;
     }
@@ -61,7 +61,7 @@ private:
 class Ackley final : public ObjectiveFunction
 {
 public:
-    [[nodiscard]] double compute_fitness(const double& x) const override
+    double compute_fitness(const double& x) const override
     {
         double sum = 0;
         sum += -20 * std::exp(-0.2 * std::sqrt(0.5 * std::pow(x, 2))) - std::exp(0.5 * std::cos(2 * M_PI * x)) + 20 +
@@ -69,7 +69,7 @@ public:
         return sum;
     }
 
-    [[nodiscard]] std::string getName() const override
+    std::string getName() const override
     {
         return name;
     }
@@ -81,12 +81,12 @@ private:
 class Sphere final : public ObjectiveFunction
 {
 public:
-    [[nodiscard]] std::string getName() const override
+    std::string getName() const override
     {
         return name;
     }
 
-    [[nodiscard]] double compute_fitness(const double& x) const override
+    double compute_fitness(const double& x) const override
     {
         return std::pow(x, 2);
     }
